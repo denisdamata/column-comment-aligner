@@ -1,0 +1,54 @@
+{
+  "name": "columncommentaligner-denisdamata",
+  "displayName": "column-comment-aligner",
+  "description": "Align inline comments to a target column in Python-like files.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.96.0"
+  },
+  "categories": [
+    "Formatters"
+  ],
+  "activationEvents": [
+    "onLanguage:gdscript",
+    "onLanguage:python",
+    "onLanguage:ruby",
+    "onLanguage:ini",
+    "onLanguage:makefile",
+    "onLanguage:r",
+    "onLanguage:elixir",
+    "onLanguage:julia"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "column-comment-aligner.align",
+        "title": "Align Comments to Target Column"
+      }
+    ],
+    "configuration": {
+      "title": "Column Comment Aligner Configure",
+      "properties": {
+        "gdscriptCommentAligner.targetColumn": {
+          "type": "number",
+          "default": 80,
+          "description": "Defines the target column for aligning comments (e.g. 80 or 120)."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "pretest": "npm run lint",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.96.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "eslint": "^9.16.0",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1"
+  }
+}
