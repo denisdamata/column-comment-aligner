@@ -35,8 +35,8 @@ function activate(context) {
             "r",
             "elixir",
             "julia"
-        ])
-        const isItemInSet = interestingItems.has(languageId)                    // https://stackoverflow.com/a/2555311/5175660 
+        ]);
+        const isItemInSet = interestingItems.has(languageId); // https://stackoverflow.com/a/2555311/5175660 
         if (!isItemInSet) {
             vscode.window.showErrorMessage(
                 'Only Python-like files are supported.'
@@ -47,6 +47,9 @@ function activate(context) {
         // Obter a configuração do usuário para a coluna de alinhamento
         const config = vscode.workspace.getConfiguration('ColumnCommentAligner');
         const targetColumn = config.get('targetColumn', 80); // Valor padrão é 80
+
+        // Obter o tamanho do tab das configurações do editor
+        const tabSize = Number(editor.options.tabSize) || 4; // Padrão: 4 espaços
 
         editor.edit((editBuilder) => {
             let isInMultiLineString = false;
@@ -118,8 +121,13 @@ function activate(context) {
                 if (commentIndex !== -1) {
                     const code = text.slice(0, commentIndex).trimEnd();
                     const comment = text.slice(commentIndex).trim();
-                    const padding = Math.max(targetColumn - code.length, 1);
-                    const alignedLine = code + ' '.repeat(padding) + comment; // Usar espaços em branco
+
+                    // Verificar se há tabs na linha
+                    const hasTabs = text.includes('\t');
+                    const paddingAdjustment = hasTabs ? tabSize - 1 : 0; // Reduz o preenchimento se houver tabs
+
+                    const padding = Math.max(targetColumn - code.length - paddingAdjustment, 1);
+                    const alignedLine = code + ' '.repeat(padding) + comment;
 
                     const lineRange = new vscode.Range(lineNumber, 0, lineNumber, text.length);
                     editBuilder.replace(lineRange, alignedLine);
