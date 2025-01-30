@@ -1,6 +1,7 @@
 # Column Comment Aligner for Python-like Code
 
-This is the extension was created by Denis da Mata using DeepSeek AI. This extension aligns comments in Python to
+This is the extension was created by Denis da Mata using DeepSeek AI. This VS Code extension aligns comments in Python
+to
 column 80, like Assembly comments, but only if there is code on the same line. If the line contains no code, the
 extension does nothing.
 
