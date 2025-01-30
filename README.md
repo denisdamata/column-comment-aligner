@@ -1,5 +1,7 @@
 # Column Comment Aligner for Python-like Code
 
+![](https://raw.githubusercontent.com/denisdamata/column-comment-aligner/refs/heads/main/assembly-code.png)
+
 This is the extension was created by Denis da Mata using DeepSeek AI. This VS Code extension aligns comments in Python
 to
 column 80, like Assembly comments, but only if there is code on the same line. If the line contains no code, the
