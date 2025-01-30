@@ -32,4 +32,10 @@ Isso é uma string multi -line com # não comentário
  
 # Teste 11: Código com # dentro de string e comentário real
 func _ready():
-    print("Cuidado com # em strings") # Imprime uma mensagem
+	print("Cuidado com # em strings") # Imprime uma mensagem
+       
+func breakSprite(): 
+	for piece in pieces.size():
+		var pieceInstance = boxPieces.instantiate() # Uma instância para cada peça.
+		get_parent().add_child(pieceInstance) # `pieceInstance` é um `RigidBody2D` com vários filhos.
+

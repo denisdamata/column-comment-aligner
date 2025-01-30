@@ -122,10 +122,14 @@ function activate(context) {
                     const code = text.slice(0, commentIndex).trimEnd();
                     const comment = text.slice(commentIndex).trim();
 
-                    // Verificar se há tabs na linha
-                    const hasTabs = text.includes('\t');
-                    const paddingAdjustment = hasTabs ? tabSize - 1 : 0; // Reduz o preenchimento se houver tabs
+                    if (code === '') {
+                        continue; // Ignora a linha
+                    }
 
+                    // Verificar se há tabs na linha
+                    const leadingTabs = (text.match(/^\t+/g) || [])[0]?.length || 0; // Conta tabs no começo da linha
+                    const paddingAdjustment = leadingTabs * (tabSize - 1); // Reduz o preenchimento com base nos tabs
+                    
                     const padding = Math.max(targetColumn - code.length - paddingAdjustment, 1);
                     const alignedLine = code + ' '.repeat(padding) + comment;
 
